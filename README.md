@@ -28,7 +28,7 @@ The diagram below shows the full wiring schematic of the system, including the N
 
 **Total Estimated Cost: ~$29.50**
 
-![Bill of Materials](assets/TEC.png)
+![Bill of Materials](/TEC.png)
 
 ---
 
