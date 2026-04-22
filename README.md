@@ -1,10 +1,36 @@
 # Secure Door Access Management System
 
-An embedded access control system built on the **NUCLEO-G474RE** development board using **Mbed OS 6** and **C++**. Developed as part of the MOD007361 Embedded Systems module at Anglia Ruskin University.
+An embedded access control system built on the **STM32 NUCLEO-G474RE** development board using **Mbed OS 6** and **C++**. Developed as part of the MOD007361 Embedded Systems module at Anglia Ruskin University.
+
+---
 
 ## Overview
 
 This project implements a secure door access management system that authenticates users via a 4×4 matrix keypad and controls a door lock (simulated by the onboard LED). The system communicates with a serial terminal GUI for remote interaction and provides audio-visual feedback through a passive buzzer.
+
+---
+
+## System Schematic
+
+The diagram below shows the full wiring schematic of the system, including the NUCLEO-G474RE, the 4×4 matrix keypad (sensor), and the passive buzzer module (actuator).
+
+![System Schematic](assets/Schematics.png)
+
+---
+
+## Components & Bill of Materials
+
+| Component | Type | Qty | Unit Price | Source |
+|-----------|------|-----|------------|--------|
+| STM32 NUCLEO-G474RE | MCU | 1 | ~$23.00 | Amazon |
+| 4×4 Matrix Membrane Keypad | Sensor | 1 | ~$4.50 | Amazon |
+| Generic 5V Passive Buzzer Module | Actuator | 2 | ~$1.00 | Amazon |
+
+**Total Estimated Cost: ~$29.50**
+
+![Bill of Materials](assets/TEC.png)
+
+---
 
 ## Features
 
@@ -15,30 +41,57 @@ This project implements a secure door access management system that authenticate
 - **Audio feedback** — passive buzzer driven via PWM with distinct tones for keypress, access granted, access denied, and doorbell events
 - **Serial terminal GUI** — full menu-driven interface over USART2 at 115200 baud (compatible with Tera Term, PuTTY, VS Code Serial Monitor)
 
-## Hardware
+---
+
+## Hardware Connections
 
 | Component | Connection |
 |-----------|------------|
-| NUCLEO-G474RE | Main microcontroller |
-| 4×4 Matrix Keypad | R1–R4 → A0–A3, C1–C4 → A4–A5, D11–D12 |
-| Passive Buzzer | GND → GND, VCC → 3V3, I/O → D13 (PWM) |
+| Keypad R1–R4 | A0–A3 (GPIO) |
+| Keypad C1–C4 | A4–A5, D11–D12 (GPIO) |
+| Buzzer GND | GND |
+| Buzzer VCC | 3V3 |
+| Buzzer I/O | D13 (PWM) |
 | Onboard LED (PA_5) | Door lock actuator (built-in) |
 | Onboard Button (PC_13) | Doorbell sensor (built-in) |
 | USB Cable | Serial communication to PC |
 
+---
+
+## Build & Assembly Instructions
+
+The following screenshots outline the full fabrication, wiring, bring-up, and assembly process for the system.
+
+### Part 1 — Fabrication & Wiring
+
+![Instructions Part 1](assets/INS_01.png)
+
+### Part 2 — Bring-up & Assembly
+
+![Instructions Part 2](assets/INS_02.png)
+
+---
+
 ## Project Structure
 
 ```
-├── main.cpp                 # Firmware source code
-├── mbed-os.lib              # Mbed OS library reference
-├── mbed_app.json            # Mbed build configuration
-├── README.md                # This file
+├── main.cpp                          # Firmware source code
+├── mbed-os.lib                       # Mbed OS library reference
+├── mbed_app.json                     # Mbed build configuration
+├── README.md                         # This file
+├── assets/                           # Images used in README
+│   ├── Schematics.png
+│   ├── TEC.png
+│   ├── INS_01.png
+│   └── INS_02.png
+├── door_access_system_files (1).zip  # Wireframe and 3D layout files
 ├── docs/
-│   ├── limitations.docx     # 5 limitations write-up (2 addressed, 3 future work)
-│   └── flow_diagram.png     # System flow diagram
+│   └── limitations_final.docx        # 5 limitations write-up (submitted separately)
 └── video/
-    └── demo.mp4             # 5-minute demonstration video
+    └── demo.mp4                      # 5-minute demonstration video
 ```
+
+---
 
 ## Building and Flashing
 
@@ -47,6 +100,8 @@ This project implements a secure door access management system that authenticate
 3. Build the project (Mbed OS 6)
 4. Flash the compiled binary to the board via USB drag-and-drop or the IDE flash button
 
+---
+
 ## Serial Terminal Setup
 
 1. Install the **STMicroelectronics STLink driver** (not the generic Microsoft USB Serial driver)
@@ -54,19 +109,23 @@ This project implements a secure door access management system that authenticate
 3. Connect to the STLink COM port at **115200 baud**, 8N1
 4. Set line endings to **CR+LF**
 
+---
+
 ## Usage
 
 1. Power on the board — the welcome banner appears on the serial terminal
-2. Enter the 4-digit PIN using the keypad (default: `2580`)
+2. Enter the 4-digit PIN using the keypad
 3. Upon successful authentication, use the serial terminal commands:
    - `U` — Unlock door (LED on)
    - `L` — Lock door (LED off)
    - `Q` — Logout (returns to PIN prompt)
 4. Press the onboard blue button to trigger the doorbell
 
+---
+
 ## Limitations
 
-Five system limitations are documented in `docs/limitations.docx`:
+Five system limitations are documented in `docs/limitations_final.docx`:
 
 **Addressed in implementation:**
 1. No user authentication → PIN-based auth with keypad and lockout
@@ -77,6 +136,8 @@ Five system limitations are documented in `docs/limitations.docx`:
 4. No persistent access log or audit trail
 5. No physical security or tamper protection on hardware
 
+---
+
 ## Tools and Environment
 
 - **IDE:** Keil Studio Cloud / VS Code with Keil Studio Pack
@@ -85,6 +146,8 @@ Five system limitations are documented in `docs/limitations.docx`:
 - **Board:** STM32 NUCLEO-G474RE
 - **Terminal:** Tera Term / VS Code Serial Monitor
 
+---
+
 ## License
 
-This project was developed for academic assessment purposes.
+This project was developed for academic assessment purposes as part of the MOD007361 module at Anglia Ruskin University.
