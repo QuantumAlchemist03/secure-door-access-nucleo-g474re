@@ -14,7 +14,7 @@ This project implements a secure door access management system that authenticate
 
 The diagram below shows the full wiring schematic of the system, including the NUCLEO-G474RE, the 4×4 matrix keypad (sensor), and the passive buzzer module (actuator).
 
-![System Schematic](assets/Schematics.png)
+![System Schematic](/Schematics.png)
 
 ---
 
@@ -64,11 +64,11 @@ The following screenshots outline the full fabrication, wiring, bring-up, and as
 
 ### Part 1 — Fabrication & Wiring
 
-![Instructions Part 1](assets/INS_01.png)
+![Instructions Part 1](/INS_01.png)
 
 ### Part 2 — Bring-up & Assembly
 
-![Instructions Part 2](assets/INS_02.png)
+![Instructions Part 2](/INS_02.png)
 
 ---
 
